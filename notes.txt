@@ -1,0 +1,4 @@
+styled-components
+react-icons
+react-router-dom
+react-responsive-carousel

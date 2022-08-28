@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { GlobalStyle } from "GlobalStyle";
+import React, { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "styles/theme";
+import {BrowserRouter as Router} from "react-router-dom";
+import { Header, Hero, Menu, Service, Reviews, Chefs, Footer } from "components";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 function App() {
+  const [theme, setTheme] = useState("light");
+
+  const changeTheme = () => {
+    if(theme === "light"){
+      setTheme("dark");
+    }else{
+      setTheme("light");
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <GlobalStyle/>
+        <Header setTheme={changeTheme}/>
+        <Hero />
+        <Menu />
+        <Service /> 
+        <Reviews />
+        <Chefs />
+        <Footer />
+      </ThemeProvider>
+    </Router>
   );
 }
 
